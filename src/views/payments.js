@@ -12,7 +12,7 @@ class MakePayments extends Component {
     super(props);
 
     this.state = {
-      amount: 0,
+      amount: '',
       receivingAddress: '',
       pay: false
     };
@@ -22,6 +22,10 @@ class MakePayments extends Component {
       receiver: this.state.receivingAddress,
       amount: this.state.amount,
     });
+    this.setState( {
+        amount: '',
+        receivingAddress: ''
+      })
   }
   render() {
     return (
@@ -50,8 +54,13 @@ class MakePayments extends Component {
                         onChange={(e) => this.setState({ amount: e.target.value })}
                     />
                     </div>
+                    {
+                        this.props.payment.msg ?
+                        <p>{this.props.payment.msg}</p> :
+                        null
+                    }
                     <br/>
-                    <Button fullWidth variant='raised' color='primary' onClick={() => this.makePayment()}>
+                    <Button disabled={this.props.payment.loading} fullWidth variant='raised' color='primary' onClick={() => this.makePayment()}>
                         Pay
                     </Button>
                 </div>

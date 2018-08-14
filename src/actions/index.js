@@ -10,10 +10,13 @@ export const CREATE_WALLET = 'CREATE_WALLET';
 export const CREATE_WALLET_SUCCESS = 'CREATE_WALLET_SUCCESS';
 
 export const MAKE_PAYMENT = 'MAKE_PAYMENT';
+export const MAKE_PAYMENT_SUCCESS = 'MAKE_PAYMENT_SUCCESS';
 
 export const UPDATE_WALLET = 'UPDATE_WALLET';
 
 export const UPDATE_KEY = 'UPDATE_KEY';
+
+export const CLEAR_MSG = "CLEAR_MSG"
 
 const server = new Stellar.Server(serverUrl);
 Stellar.Network.useTestNetwork();
@@ -61,7 +64,7 @@ export const makePayment = ({ receiver, amount }) => (
       const privateKey = getState().wallet.privateKey;
       const sourceKeypair = Stellar.Keypair.fromSecret(privateKey);
       const publicKey = getState().wallet.publicKey;
-
+      dispatch({ type: MAKE_PAYMENT })
       server.loadAccount(publicKey)
         .then((account) => {
           const transaction = new Stellar.TransactionBuilder(account)
@@ -81,8 +84,13 @@ export const makePayment = ({ receiver, amount }) => (
                 console.log(err);
               });
               dispatch({
-                type: MAKE_PAYMENT
+                type: MAKE_PAYMENT_SUCCESS
               });
+              setTimeout(() => {
+                dispatch({
+                  type: CLEAR_MSG
+                });
+              }, 3000)
         })
         .then(() => {
           server.loadAccount(publicKey).then((account) => {

@@ -4,7 +4,9 @@ import {
     MAKE_PAYMENT,
     UPDATE_WALLET,
     UPDATE_KEY,
-    CREATE_WALLET_SUCCESS
+    CREATE_WALLET_SUCCESS,
+    MAKE_PAYMENT_SUCCESS,
+    CLEAR_MSG
   } from './../actions';
   
   export const transactions = (state = [], action) => {
@@ -51,10 +53,19 @@ import {
     }
   };
   
-  export const makePayment = (state = '', action) => {
+  export const payment = (state = { loading: false }, action) => {
     switch (action.type) {
       case MAKE_PAYMENT:
-        return state;
+        return {
+          loading: true
+        };
+      case CLEAR_MSG:
+        return {
+          ...state,
+          msg: null
+        };
+      case MAKE_PAYMENT_SUCCESS:
+        return {...state, msg: "Payment made", loading: false};
       default:
         return state;
     }

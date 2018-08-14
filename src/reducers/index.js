@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 import {
   transactions,
-  wallet
+  wallet,
+  payment
 } from './payment_reducer';
 
 const rootReducer = combineReducers({
   transactions,
-  wallet
+  wallet,
+  payment
 });
 
 export default rootReducer;
