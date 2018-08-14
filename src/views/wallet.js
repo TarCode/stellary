@@ -32,17 +32,20 @@ class Account extends Component {
   renderInputWallet() {
     if (this.state.inputWallet) {
       return (
-        <div>
+        <div className='container'>
           <div>
             <TextField
+                fullWidth
                 type="text"
                 label="Public key"
                 value={this.props.wallet.publicKey}
                 onChange={(e) => this.updateKey({ payloadKey: e.target.value, key: 'publicKey' })}
             />
           </div>
+          <br/>
           <div>
             <TextField
+                fullWidth
                 type="text"
                 label="Private key"
                 value={this.props.wallet.privateKey}
