@@ -7,6 +7,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <h1>Stellary</h1>
+        <p>UI for interacting with the Stellar blockchain (Testnet)</p>
         <Wallet/>
         <Transactions/>
       </div>

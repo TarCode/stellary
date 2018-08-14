@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createWallet, updateKey } from './../actions';
 
+import Loader from '../components/loader'
+
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
@@ -67,21 +69,28 @@ class Account extends Component {
     console.log(this.props);
     return (
         <div>
-            <p>Stellar Account</p>
-
-            <Button variant="outlined" color="secondary" disabled={this.props.wallet.loading} onClick={() => this.createWallet()}>
-                Create Wallet
-            </Button>
             {
-                !this.state.inputWallet ?
-                <Button variant="outlined" color="primary" onClick={() => this.inputWallet()}>
-                    Already have a Wallet
-                </Button> : 
-                this.renderInputWallet()
-            }
-            <br />
+                this.props.wallet.loading ?
+                <Loader/> :
+                <div>
+                    <h2>Account</h2>
 
-            {this.renderBalance()}
+                    <Button fullWidth variant="outlined" color="secondary" disabled={this.props.wallet.loading} onClick={() => this.createWallet()}>
+                        Create Wallet
+                    </Button>
+                    <br/><br/>
+                    {
+                        !this.state.inputWallet ?
+                        <Button fullWidth variant="outlined" color="primary" onClick={() => this.inputWallet()}>
+                            Already have a Wallet
+                        </Button> : 
+                        this.renderInputWallet()
+                    }
+                    <br />
+
+                    {this.renderBalance()}
+                </div>
+            }
         </div>
     );
   }

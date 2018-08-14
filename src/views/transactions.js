@@ -16,6 +16,7 @@ class Payments extends Component {
 
     return (
       <div>
+        <h2>Transactions</h2>
         {this.renderTransactions()}
       </div>
     );
