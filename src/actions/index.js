@@ -5,9 +5,14 @@ import {
 } from '../constants/stellar';
 
 export const FETCH_TRANSACTIONS = 'FETCH_TRANSACTIONS';
+
 export const CREATE_WALLET = 'CREATE_WALLET';
+export const CREATE_WALLET_SUCCESS = 'CREATE_WALLET_SUCCESS';
+
 export const MAKE_PAYMENT = 'MAKE_PAYMENT';
+
 export const UPDATE_WALLET = 'UPDATE_WALLET';
+
 export const UPDATE_KEY = 'UPDATE_KEY';
 
 const server = new Stellar.Server(serverUrl);
@@ -37,10 +42,11 @@ export const createWallet = () => {
           addr: pair.publicKey()
         }
     });
+    dispatch({ type: CREATE_WALLET })
     req.then((res) => {
       server.loadAccount(pair.publicKey()).then((account) => {
         dispatch({
-          type: CREATE_WALLET,
+          type: CREATE_WALLET_SUCCESS,
           private: pair.secret(),
           public: pair.publicKey(),
           balance: account.balances[0].balance

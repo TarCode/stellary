@@ -3,7 +3,8 @@ import {
     CREATE_WALLET,
     MAKE_PAYMENT,
     UPDATE_WALLET,
-    UPDATE_KEY
+    UPDATE_KEY,
+    CREATE_WALLET_SUCCESS
   } from './../actions';
   
   export const transactions = (state = [], action) => {
@@ -18,16 +19,22 @@ import {
   
   const initialState = {
     publicKey: '',
-    privateKey: ''
+    privateKey: '',
+    loading: false
   };
   
   export const wallet = (state = initialState, action) => {
     switch (action.type) {
       case CREATE_WALLET:
         return {
+          loading: true
+        };
+      case CREATE_WALLET_SUCCESS:
+        return {
           publicKey: action.public,
           privateKey: action.private,
-          balance: action.balance
+          balance: action.balance,
+          loading: false
         };
       case UPDATE_WALLET:
         return {
