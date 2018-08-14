@@ -9,7 +9,7 @@ import {
   export const transactions = (state = [], action) => {
     switch (action.type) {
       case FETCH_TRANSACTIONS:
-        return [...state, action.transactions];
+        return [action.transactions, ...state];
       default:
         return state;
     }
