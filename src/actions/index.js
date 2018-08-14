@@ -69,9 +69,6 @@ export const makePayment = ({ receiver, amount }) => (
             console.log(transaction.toEnvelope().toXDR('base64'));
             server.submitTransaction(transaction)
               .then((transactionResult) => {
-                console.log(JSON.stringify(transactionResult, null, 2));
-                console.log('\nSuccess! View the transaction at: ');
-                console.log(transactionResult._links.transaction.href);
               })
               .catch((err) => {
                 console.log('An error has occured:');
