@@ -60,9 +60,16 @@ class Account extends Component {
   renderBalance() {
     if (this.props.wallet.publicKey) {
       return (
-        <div>
-          <p className="small"> Your Address: {this.props.wallet.publicKey}</p>
-          <p className="small"> Balance: {this.props.wallet.balance} XLM</p>
+        <div className='center'>
+          <br/>
+          <small>Your Address: </small><br/>
+          <h1 className="center">
+            {this.props.wallet.publicKey}
+          </h1>
+          <small>Balance: </small> <br/>
+          <h1 className="center"> 
+              {this.props.wallet.balance} XLM
+          </h1>
         </div>
       );
     }
