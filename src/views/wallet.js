@@ -61,11 +61,11 @@ class Account extends Component {
     if (this.props.wallet.publicKey) {
       return (
         <div className='center'>
-          <br/>
           <small>Your Address: </small><br/>
-          <h1 className="center">
+          <b className="center">
             {this.props.wallet.publicKey}
-          </h1>
+          </b>
+          <br/><br/>
           <small>Balance: </small> <br/>
           <h1 className="center"> 
               {this.props.wallet.balance} XLM
@@ -83,18 +83,26 @@ class Account extends Component {
                 this.props.wallet.loading ?
                 <Loader/> :
                 <div>
-                    <h2>Account</h2>
-
-                    <Button fullWidth variant="outlined" color="secondary" disabled={this.props.wallet.loading} onClick={() => this.createWallet()}>
-                        Create Wallet
-                    </Button>
-                    <br/><br/>
                     {
-                        !this.state.inputWallet ?
-                        <Button fullWidth variant="outlined" color="primary" onClick={() => this.inputWallet()}>
-                            Already have a Wallet
-                        </Button> : 
-                        this.renderInputWallet()
+                        !this.props.wallet.publicKey ?
+                        <div className='row'>
+                          <div className='col-6'>
+                            <Button fullWidth variant="outlined" color="secondary" disabled={this.props.wallet.loading} onClick={() => this.createWallet()}>
+                                Create Wallet
+                            </Button>
+                          </div>
+                          <div className='col-6'>
+                            <Button fullWidth variant="outlined" color="primary" onClick={() => this.inputWallet()}>
+                                Already have a Wallet
+                            </Button>
+                          </div>
+                        </div> : 
+                        null
+                    }
+                    {
+                      this.state.inputWallet ?
+                      this.renderInputWallet() :
+                      null
                     }
                     <br />
 
